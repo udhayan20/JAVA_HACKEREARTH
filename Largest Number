@@ -1,0 +1,29 @@
+import java.util.*;
+ 
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        
+        if (!sc.hasNext()) return;
+        String num = sc.next(); 
+        int k = sc.nextInt();   
+        
+        StringBuilder stack = new StringBuilder();
+        int left = k;
+ 
+        for (int i = 0; i < num.length(); i++) {
+            char cd = num.charAt(i);
+            
+            while (left > 0 && stack.length() > 0 && stack.charAt(stack.length() - 1) < cd) {
+                stack.deleteCharAt(stack.length() - 1);
+                left--;
+            }
+            stack.append(cd);
+        }
+ 
+        String res = stack.substring(0, stack.length() - left);
+        
+        System.out.println(res);
+        sc.close();
+    }
+}
