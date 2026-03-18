@@ -1,0 +1,39 @@
+import java.util.*;
+
+class TestClass {
+    public static void main(String args[]) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        if (!sc.hasNextInt()) return;
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            int k = sc.nextInt();
+            int[] a = new int[n];
+            int[] b = new int[n];
+
+            for (int i = 0; i < n; i++) a[i] = sc.nextInt();
+            for (int i = 0; i < n; i++) b[i] = sc.nextInt();
+
+            long totalSum = 0;
+            List<Integer> l = new ArrayList<>();
+
+            for (int i = 0; i < n; i++) {
+                totalSum += a[i];
+                if (b[i] > a[i]) {
+                    l.add(b[i] - a[i]);
+                }
+            }
+
+            Collections.sort(l, Collections.reverseOrder());
+
+            int swapsToPerform = Math.min(k, l.size());
+            for (int i = 0; i < swapsToPerform; i++) {
+                totalSum += l.get(i);
+            }
+
+            System.out.println(totalSum);
+        }
+        sc.close();
+    }
+}
