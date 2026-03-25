@@ -1,0 +1,32 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
+
+class TestClass {
+    public static void main(String args[] ) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String line = br.readLine();
+        if (line == null) return;
+        
+        int t = Integer.parseInt(line.trim());
+
+        while (t-- > 0) {
+            String s = br.readLine();
+            if (s == null) break;
+
+            int[] charCounts = new int[26];
+            for (char c : s.toCharArray()) {
+                charCounts[c - 'a']++;
+            }
+
+            int res = 0;
+            for (int count : charCounts) 
+            {
+                res += count / 2;
+            }
+
+            System.out.println(res);
+        }
+    }
+}
