@@ -1,0 +1,50 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+class TestClass 
+{
+    public static void main(String args[] ) throws Exception 
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String tLine = br.readLine();
+        if (tLine == null) return;
+        int t = Integer.parseInt(tLine.trim());
+
+        while (t-- > 0) 
+        {
+            int n = Integer.parseInt(br.readLine().trim());
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            
+            long totalSum = 0;
+            int minOdd = Integer.MAX_VALUE;
+            boolean foundOdd = false;
+
+            for (int i = 0; i < n; i++) 
+            {
+                int val = Integer.parseInt(st.nextToken());
+                totalSum += val;
+                
+                if (val % 2 != 0) 
+                {
+                    minOdd = Math.min(minOdd, val);
+                    foundOdd = true;
+                }
+            }
+
+            if (!foundOdd) 
+            {
+                System.out.println(0);
+            } 
+            else if (totalSum % 2 != 0) 
+            {
+                System.out.println(totalSum);
+            } 
+            else 
+            {
+                System.out.println(totalSum - minOdd);
+            }
+        }
+    }
+}
