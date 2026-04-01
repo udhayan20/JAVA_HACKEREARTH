@@ -1,0 +1,64 @@
+import java.util.*;
+import java.io.*;
+
+public class TestClass 
+{
+    public static void main(String[] args) throws IOException 
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String tLine = br.readLine();
+        if (tLine == null) return;
+        int T = Integer.parseInt(tLine.trim());
+
+        while (T-- > 0) 
+        {
+            String nkLine = br.readLine();
+            if (nkLine == null) 
+            {
+                break;
+            }
+            StringTokenizer st = new StringTokenizer(nkLine);
+            int N = Integer.parseInt(st.nextToken());
+            int K = Integer.parseInt(st.nextToken());
+            
+            String S = br.readLine();
+            if (S == null) 
+            {
+                break;
+            }
+
+            if (isSplitString(S, K)) 
+            {
+                System.out.println("YES");
+            } 
+            else 
+            {
+                System.out.println("NO");
+            }
+        }
+    }
+
+    private static boolean isSplitString(String s, int k) 
+    {
+        int[] freq = new int[26];
+        int Count = 0;
+        boolean frequency = false;
+
+        for (int i = 0; i < s.length(); i++) 
+        {
+            int charIdx = s.charAt(i) - 'a';
+            if (freq[charIdx] == 0) 
+            {
+                Count++;
+            }
+            freq[charIdx]++;
+            
+            if (freq[charIdx] >= k) 
+            {
+                frequency = true;
+            }
+        }
+        return frequency && (Count >= k);
+    }
+}
