@@ -1,0 +1,45 @@
+import java.util.*;
+import java.io.*;
+
+class TestClass 
+{
+    public static void main(String args[]) throws Exception 
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String line = br.readLine();
+        if (line == null) 
+        {
+            return;
+        }
+        
+        int t = Integer.parseInt(line.trim());
+        while (t-- > 0) 
+        {
+            int n = Integer.parseInt(br.readLine().trim());
+            int[] prefix = new int[n + 1];
+            
+            String[] elements = br.readLine().trim().split("\\s+");
+            for (int i = 0; i < n; i++) 
+            {
+                int val = Integer.parseInt(elements[i]);
+                int isGood = (val >= 2) ? 1 : 0;
+                prefix[i + 1] = prefix[i] + isGood;
+            }
+            
+            int q = Integer.parseInt(br.readLine().trim());
+            StringBuilder out = new StringBuilder();
+            while (q-- > 0) 
+            {
+                String[] query = br.readLine().trim().split("\\s+");
+                int l = Integer.parseInt(query[0]);
+                int r = Integer.parseInt(query[1]);
+                
+                long k = prefix[r] - prefix[l - 1];
+                long rangeLength = (r - l + 1);
+                long result = (rangeLength * k) - (k * (k + 1) / 2);
+                out.append(result).append("\n");
+            }
+            System.out.print(out);
+        }
+    }
+}
