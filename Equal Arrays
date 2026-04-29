@@ -1,0 +1,77 @@
+import java.util.*;
+import java.io.*;
+
+class TestClass 
+{
+    public static void main(String args[]) throws Exception 
+	{
+        Scanner sc = new Scanner(System.in);
+        if (!sc.hasNextInt()) 
+		{
+			return;
+		}
+        
+        int t = sc.nextInt();
+        while (t-- > 0) 
+		{
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            
+            long[] a = new long[n];
+            long totalA = 0;
+            for (int i = 0; i < n; i++) 
+			{
+                a[i] = sc.nextLong();
+                totalA += a[i];
+            }
+            
+            long[] b = new long[m];
+            long totalB = 0;
+            for (int i = 0; i < m; i++) 
+			{
+                b[i] = sc.nextLong();
+                totalB += b[i];
+            }
+            
+            if (totalA != totalB) 
+			{
+                System.out.println("-1");
+                continue;
+            }
+            
+            int count = 0;
+            int i = 0, j = 0;
+            long sumA = 0, sumB = 0;
+            
+            while (i < n && j < m) 
+			{
+                if (sumA == 0 && sumB == 0) 
+				{
+                    sumA += a[i++];
+                    sumB += b[j++];
+                }
+                
+                while (sumA != sumB && (i < n || j < m)) 
+				{
+                    if (sumA < sumB) 
+					{
+                        sumA += a[i++];
+                    } 
+					else 
+					{
+                        sumB += b[j++];
+                    }
+                }
+                
+                if (sumA == sumB) 
+				{
+                    count++;
+                    sumA = 0;
+                    sumB = 0;
+                }
+            }
+            
+            System.out.println(count);
+        }
+    }
+}
